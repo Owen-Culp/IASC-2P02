@@ -8,7 +8,7 @@ const canvas = document.querySelector('.webgl')
 
 //Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('gray')
+scene.background = new THREE.Color('skyblue')
 
 //Camera
 const camera = new THREE.PerspectiveCamera(
@@ -36,6 +36,12 @@ const sphereMaterial = new THREE.MeshNormalMaterial()
 const testSphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
 scene.add(testSphere)
 
+//testBox
+const boxGeometry = new THREE.BoxGeometry(1, 1, 1)
+const boxMaterial = new THREE.MeshNormalMaterial()
+const testBox = new THREE.Mesh(boxGeometry, boxMaterial)
+scene.add(testBox)
+
 /*******************
 ** ANIMATION LOOP **
 ********************/
@@ -46,9 +52,14 @@ const animation = () => {
     const elaspedTime = clock.getElapsedTime()
 
     // Animate testSphere
-    console.log(Math.sin(elaspedTime))
-    testSphere.position.y = Math.sin(elaspedTime)
-    testSphere.position.x = Math.cos(elaspedTime)
+    testSphere.position.z = (0, 0, -5)
+    testSphere.position.y = (Math.sin(elaspedTime)) * 5
+    testSphere.position.x = (Math.cos(elaspedTime)) * 5
+
+    // Animate testBox
+    testBox.position.z = (0, 0, -5)
+    testBox.position.y = Math.sin(elaspedTime)
+    testBox.position.x = -Math.cos(elaspedTime)
 
     // Renderer
     renderer.render(scene, camera)
